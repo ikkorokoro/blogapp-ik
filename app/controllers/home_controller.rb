@@ -1,6 +1,6 @@
 class HomeController < ApplicationController #< ApplicationControllerBase
   def index 
-    @title = 'デイトラ'
+    @article = Article.first
     #デフォルトではcontrolllerはindexのviewsを表示する
   end
 
