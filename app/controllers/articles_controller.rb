@@ -1,10 +1,9 @@
 class ArticlesController < ApplicationController
     def index
-        @article = Article.first
-        #デフォルトではcontrolllerはindexのviewsを表示する
+        @articles = Article.all#デフォルトではcontrolllerはindexのviewsを表示する
       end
-    
-      def about
-        # デフォルトではrender 'home/about'が呼ばれるので記述しなくてもいい
+
+      def show
+        @article = Article.find(params[:id])
       end
-end
+    end
