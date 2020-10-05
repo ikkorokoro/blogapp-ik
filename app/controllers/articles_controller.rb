@@ -35,6 +35,13 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def destroy
+    article = Article.find(params[:id])
+    if article.destroy! #! 削除されない場合エラーを発生させる。
+      redirect_to root_path, notice: "削除に成功しました"
+    end
+  end
+
   private
 
   def article_params
