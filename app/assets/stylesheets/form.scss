@@ -1,0 +1,21 @@
+input {
+    &.text {
+      width: 100%;
+      margin: 8px 0px;
+      padding: 16px 24px;
+      border: 1px solid #EBEBEB;
+    }
+  }
+  
+  label {
+    font-size: 12px;
+  }
+  
+  textarea {
+    width: 100%;
+    margin: 8px 0px;
+    padding: 8px 8px;
+    min-height: 440px;/* 高さの最小値を指定する */
+    resize: vertical;/* 縦方向のみユーザーがリサイズを可能とします。contentの右下に棒２本をドラッグするとサイズが変わる */
+    border: 1px solid #EBEBEB;
+  }
