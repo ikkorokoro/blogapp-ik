@@ -21,4 +21,15 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+has_many :articles, dependent: :destroy#userが削除された際に紐付いているarticlesも削除する
+
+def has_written?(article)
+  articles.exists?(id: article.id)
+end
+
+def display_name#emialの＠より前の部分を習得してそれをアカウント名とする
+  self.email.split('@').first
+  #['cohki0305', '@gmail.com']指定した文字で分割して文字列とする
+end
 end
