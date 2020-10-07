@@ -3,7 +3,6 @@
     - article.errors.full_messages.each do |msg|
       %li= msg
   = form_with(model: article, local: true) do |f|
-   
     %div
       = f.label :title, 'タイトル'
     %div
