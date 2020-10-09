@@ -7,6 +7,10 @@
     %div
       = f.label :nickname, 'ハンドルネーム'
     %div
+      = f.label :avatar, 'アバター'
+    %div
+      = f.file_field :avatar
+    %div
       = f.text_field :nickname, class: 'text'
     %div
       = f.label :introduction, '自己紹介'
@@ -15,7 +19,7 @@
     %div
       = f.label :gender, '性別'
     %div
-      = f.select :gender, Profile.genders.keys, {}, { class: 'text' }
+      = f.select :gender, Profile.genders.map { |k, v| [ I18n.t("enum.genders.#{k}"), k ] }, {}, { class: 'text' }
       -# selectのcss適用は第四引数にハッシュで記載するため第三引数には空のハッシュを記述する
       -# Profile.genders.keysはmodelに記載されているgenderの種類をハッシュで習得して表示できるため無駄なコードを各量が減る
     %div  

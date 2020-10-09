@@ -41,7 +41,7 @@ def display_name#emialの＠より前の部分を習得してそれをアカウ�
   profile&.nickname || self.email.split('@').first
 end
 
-delegate :birthday, :gender, to: :profile, allow_nil: true
+delegate :birthday, :age, :gender, to: :profile, allow_nil: true
 
 # def birthday
 #   profile&.birthday
@@ -53,5 +53,13 @@ delegate :birthday, :gender, to: :profile, allow_nil: true
 
 def preapre_profile 
   profile || current_user.build_profile
+end
+
+def avatar_image
+  if profile&.avatar&.attached?#アップロードされているかいないか
+    profile.avatar
+  else
+    'default-avatar.png'
+  end
 end
 end

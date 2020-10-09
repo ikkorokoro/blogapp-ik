@@ -33,7 +33,8 @@ def profile_params
     :introduction,
     :gender,
     :birthday,
-    :subscribed
+    :subscribed,
+    :avatar
   )
 end
 

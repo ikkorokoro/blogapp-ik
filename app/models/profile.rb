@@ -19,16 +19,17 @@
 class Profile < ApplicationRecord
   enum gender: { male: 0, female: 1, other: 2 }#ハッシュで性別と数字を紐付ける
   belongs_to :user
+  has_one_attached :avatar#profileにavatarのデータを習得できる
 
   def age
     return '不明' unless birthday.present?
     #現在の年を習得する
     years = Time.zone.now.year - birthday.year
-    day = Time.zone.now.yday - birthday.year
+    days = Time.zone.now.yday - birthday.yday
       if days <  0 
         "#{years - 1}歳"
       else
-        "{years}歳"
+        "#{years}歳"
       end
   end
 end
