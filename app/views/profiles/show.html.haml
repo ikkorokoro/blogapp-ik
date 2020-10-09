@@ -1,0 +1,19 @@
+.container.profilePage
+  .profilePage_user
+    .profilePage_user_image
+      = image_tag current_user.avatar_image
+    .profilePage_user_basicInfo
+      .profilePage_user_name
+        .profilePage_user_displayName
+          #{current_user.display_name} (#{current_user.age} : #{I18n.t("enum.genders.#{current_user.gender}")})
+        .profilePage_user_actionButton
+          = link_to 'Edit', edit_profile_path
+      .profilePage_user_introduction
+        = current_user.profile&.introduction
+        -#  if current_user.profile && current_user.introducution
+              current_user.introdocution
+            end
+- current_user.articles.each do |article|
+  = link_to article_path(article) do
+    =render 'commons/article', article: article
+    -# articleフォルダの_article.html.hamlを呼び出す
