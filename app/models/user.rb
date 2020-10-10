@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
+#  id                     :bigint           not null, primary key
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  remember_created_at    :datetime
@@ -23,11 +23,19 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
 has_many :articles, dependent: :destroy#userが削除された際に紐付いているarticlesも削除する
+has_many :likes, dependent: :destroy
+has_many :favorite_articles, through: :likes, source: :article#likesテーブルを通してarticlesテーブルのデータを習得する
 has_one :profile, dependent: :destroy
+
 
 def has_written?(article)
   articles.exists?(id: article.id)
 end
+
+def has_liked?(article)
+  likes.exists?(article_id: article.id)
+end
+
 
 def display_name#emialの＠より前の部分を習得してそれをアカウント名とする
   # if profile && profile.nickname

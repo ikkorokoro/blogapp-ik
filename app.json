@@ -1,0 +1,16 @@
+/* herokuのサーバーの設定を記述 */
+{
+  "name": "blog app",
+  "description": "This is blogapp",
+  "keywords": [],
+  "website": "",
+  "repository": "https://github.com/ikkorokoro/blogapp-ik",
+  "env": {},
+  "addons": [
+    "heroku-postgresql:hobby-dev"
+  ],
+  "buildpacks": [{
+    "url": "heroku/nodejs"
+  }, {
+    "url": "heroku/ruby"
+  }]
