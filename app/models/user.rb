@@ -24,7 +24,7 @@ class User < ApplicationRecord
 
 has_many :articles, dependent: :destroy#userが削除された際に紐付いているarticlesも削除する
 has_many :likes, dependent: :destroy
-has_many :favorite_articles, through: :likes, source: :article#likesテーブルを通してarticlesテーブルのデータを習得する
+has_many :favorite_articles, through: :likes, source: :article#自分がいいねした記事を習得できるlikesテーブルを通してarticlesテーブルのデータを習得する
 has_one :profile, dependent: :destroy
 
 
@@ -45,11 +45,13 @@ def display_name#emialの＠より前の部分を習得してそれをアカウ�
   #      #['cohki0305', '@gmail.com']指定した文字で分割して文字列とする
   # end
   #ぼっち演算子
+  #profileがない場合にprofile.nicknameを行うとnilclassエラーが起きるのでnillgardをする
   #profileがnilでなければ.nicknameを行う,
+  #profileが存在しない場合がある
   profile&.nickname || self.email.split('@').first
 end
 
-delegate :birthday, :age, :gender, to: :profile, allow_nil: true
+delegate :birthday, :age, :gender, to: :profile, allow_nil: true#allow_nilがボッチ演算子の代わりになる
 
 # def birthday
 #   profile&.birthday
@@ -64,7 +66,7 @@ def preapre_profile
 end
 
 def avatar_image
-  if profile&.avatar&.attached?#アップロードされているかいないか
+  if profile&.avatar&.attached?#画像がアップロードされているかのメソッド
     profile.avatar
   else
     'default-avatar.png'
