@@ -61,8 +61,8 @@ delegate :birthday, :age, :gender, to: :profile, allow_nil: true#allow_nilがボ
 #   profile&.gender
 # end
 
-def preapre_profile 
-  profile || current_user.build_profile
+def prepre_profile
+  profile || build_profile
 end
 
 def avatar_image

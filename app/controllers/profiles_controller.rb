@@ -1,9 +1,9 @@
 class ProfilesController < ApplicationController
+before_action :authenticate_user!#コントローラーに設定して、ログイン済ユーザーのみにアクセスを許可する
 
-before_action  :authenticate_user!#コントローラーに設定して、ログイン済ユーザーのみにアクセスを許可する
 
 def show
-	@profile = current_user.profile
+ @profile = current_user.profile
 end
 
 def edit
@@ -12,11 +12,11 @@ def edit
   # else
   #   @profile = current_user.build_profile#has_oneの場合は_でかく
   # end
-  @profile = current_user.preapre_profile 
+  @profile = current_user.preapre_profile
 end
 
 def update
-  @profile = current_user.preapre_profile 
+  @profile = current_user.prepre_profile 
   @profile.assign_attributes(profile_params)#生成されているインスタンスに対してデータを入れたい場合はassign_attributesを使う
   if @profile.save
     redirect_to profile_path, notice: 'プロフィール更新！'
@@ -37,5 +37,4 @@ def profile_params
     :avatar
   )
 end
-
 end
