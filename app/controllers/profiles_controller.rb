@@ -12,7 +12,7 @@ def edit
   # else
   #   @profile = current_user.build_profile#has_oneの場合は_でかく
   # end
-  @profile = current_user.preapre_profile
+  @profile = current_user.prepre_profile
 end
 
 def update
