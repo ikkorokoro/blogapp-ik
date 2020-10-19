@@ -27,7 +27,23 @@ has_many :likes, dependent: :destroy
 has_many :favorite_articles, through: :likes, source: :article#自分がいいねした記事を習得できるlikesテーブルを通してarticlesテーブルのデータを習得する
 has_one :profile, dependent: :destroy
 
+=begin 
+＝＝＝＝＝自分がフォローしているユーザーとのralationship＝＝＝＝＝＝
+=end
+has_many :following_relationships, foreign_key: 'follower_id', class_name: 'Relationship', dependent: :destroy
+#自分がフォローする。（フォロワー）      外部キーの名前:                クラス名:
+has_many :followings, through: :following_relationships, source: :following
+#自分がフォロ-したユーザーの情報を取得できる
 
+=begin
+＝＝＝＝＝自分をフォローしているユーザーとのralationship＝＝＝＝＝＝
+=end
+has_many :follower_relationships, foreign_key: 'following_id', class_name: 'Relationship'
+#相手が自分をフォローする（フォローされる）
+has_many :followers, through: :follower_relationships, source: :follower
+#フォローしているユーザーの情報を取得する
+
+#====表示されているarticleが自分が投稿したarticlesに一致するか？=======
 def has_written?(article)
   articles.exists?(id: article.id)
 end
@@ -35,7 +51,15 @@ end
 def has_liked?(article)
   likes.exists?(article_id: article.id)
 end
-
+#===フォローするメソッド===
+def follow!(user)
+  following_relationships.create!(following_id: user.id)
+  end
+#===フォローを外すメソッド＝＝＝
+def unfollow!(user)
+  relation = following_relationships.find_by!(following_id: user.id)
+  relation.destroy!
+end
 
 def display_name#emialの＠より前の部分を習得してそれをアカウント名とする
   # if profile && profile.nickname
