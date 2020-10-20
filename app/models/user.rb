@@ -27,39 +27,53 @@ has_many :likes, dependent: :destroy
 has_many :favorite_articles, through: :likes, source: :article#自分がいいねした記事を習得できるlikesテーブルを通してarticlesテーブルのデータを習得する
 has_one :profile, dependent: :destroy
 
-=begin 
-＝＝＝＝＝自分がフォローしているユーザーとのralationship＝＝＝＝＝＝
-=end
+
+#＝＝＝＝＝自分がフォローしているユーザーとのralationship(フォロワー)＝＝＝＝＝＝
+
 has_many :following_relationships, foreign_key: 'follower_id', class_name: 'Relationship', dependent: :destroy
 #自分がフォローする。（フォロワー）      外部キーの名前:                クラス名:
 has_many :followings, through: :following_relationships, source: :following
 #自分がフォロ-したユーザーの情報を取得できる
 
-=begin
-＝＝＝＝＝自分をフォローしているユーザーとのralationship＝＝＝＝＝＝
-=end
+
+#＝＝＝＝＝自分をフォローしているユーザーとのralationship(フォローされる)＝＝＝＝＝＝
+
 has_many :follower_relationships, foreign_key: 'following_id', class_name: 'Relationship'
 #相手が自分をフォローする（フォローされる）
 has_many :followers, through: :follower_relationships, source: :follower
 #フォローしているユーザーの情報を取得する
 
-#====表示されているarticleが自分が投稿したarticlesに一致するか？=======
+#====showで表示されているarticleは自分が投稿したarticlesに一致するか？=======
 def has_written?(article)
   articles.exists?(id: article.id)
 end
-
+#===自分がいいねをしたarticleの中に引数と一致するarticleがあるか？===
 def has_liked?(article)
   likes.exists?(article_id: article.id)
 end
+#===フォローしているユーザーの中に引数と一致するユーザーがいるか？===
+def has_followed?(user)
+  following_relationships.exists?(following_id: user.id)
+end
+
 #===フォローするメソッド===
 def follow!(user)
-  following_relationships.create!(following_id: user.id)
+  #==userがUserクラスのインスタンスであるか？is_a?(User)==
+    #==userのインスタンスか数字のみが渡される可能性があるため==
+  user_id = get_user_id(user)
+  following_relationships.create!(following_id: user_id)
   end
+
 #===フォローを外すメソッド＝＝＝
 def unfollow!(user)
-  relation = following_relationships.find_by!(following_id: user.id)
+  #==userがUserクラスのインスタンスであるか？is_a?(User)==
+    #==userのインスタンスか数字のみが渡される可能性があるため==
+  user_id = get_user_id(user)
+  relation = following_relationships.find_by!(following_id: user_id)
   relation.destroy!
 end
+
+
 
 def display_name#emialの＠より前の部分を習得してそれをアカウント名とする
   # if profile && profile.nickname
@@ -94,6 +108,17 @@ def avatar_image
     profile.avatar
   else
     'default-avatar.png'
+  end
+end
+
+private
+#==userがUserクラスのインスタンスであるか？is_a?(User)==
+    #==userのインスタンスか数字のみが渡される可能性があるため==
+def get_user_id(user)
+  if user.is_a?(User)
+    user.id
+  else
+    user
   end
 end
 end
