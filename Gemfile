@@ -25,7 +25,8 @@ gem 'annotate' #=========================追加
 gem 'devise'#============================追加
 gem 'faker' #============================追加
 gem 'hamlit' #===========================追加
-gem 'aws-sdk-s3', require: false
+gem 'aws-sdk-s3', require: false #=======追加
+gem 'active_decorator'#==================追加
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'

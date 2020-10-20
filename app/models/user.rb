@@ -28,6 +28,16 @@ has_many :favorite_articles, through: :likes, source: :article#自分がいい�
 has_one :profile, dependent: :destroy
 
 
+#====showで表示されているarticleは自分が投稿したarticlesに一致するか？=======
+def has_written?(article)
+  articles.exists?(id: article.id)
+end
+#===自分がいいねをしたarticleの中に引数と一致するarticleがあるか？===
+def has_liked?(article)
+  likes.exists?(article_id: article.id)
+end
+
+
 #＝＝＝＝＝自分がフォローしているユーザーとのralationship(フォロワー)＝＝＝＝＝＝
 
 has_many :following_relationships, foreign_key: 'follower_id', class_name: 'Relationship', dependent: :destroy
@@ -43,18 +53,6 @@ has_many :follower_relationships, foreign_key: 'following_id', class_name: 'Rela
 has_many :followers, through: :follower_relationships, source: :follower
 #フォローしているユーザーの情報を取得する
 
-#====showで表示されているarticleは自分が投稿したarticlesに一致するか？=======
-def has_written?(article)
-  articles.exists?(id: article.id)
-end
-#===自分がいいねをしたarticleの中に引数と一致するarticleがあるか？===
-def has_liked?(article)
-  likes.exists?(article_id: article.id)
-end
-#===フォローしているユーザーの中に引数と一致するユーザーがいるか？===
-def has_followed?(user)
-  following_relationships.exists?(following_id: user.id)
-end
 
 #===フォローするメソッド===
 def follow!(user)
@@ -73,21 +71,13 @@ def unfollow!(user)
   relation.destroy!
 end
 
-
-
-def display_name#emialの＠より前の部分を習得してそれをアカウント名とする
-  # if profile && profile.nickname
-  #   profile.nickname
-  # else
-  #   self.email.split('@').first
-  #      #['cohki0305', '@gmail.com']指定した文字で分割して文字列とする
-  # end
-  #ぼっち演算子
-  #profileがない場合にprofile.nicknameを行うとnilclassエラーが起きるのでnillgardをする
-  #profileがnilでなければ.nicknameを行う,
-  #profileが存在しない場合がある
-  profile&.nickname || self.email.split('@').first
+#===フォローしているユーザーの中に引数と一致するユーザーがいるか？===
+def has_followed?(user)
+  following_relationships.exists?(following_id: user.id)
 end
+
+
+
 
 delegate :birthday, :age, :gender, to: :profile, allow_nil: true#allow_nilがボッチ演算子の代わりになる
 
@@ -103,13 +93,6 @@ def prepre_profile
   profile || build_profile
 end
 
-def avatar_image
-  if profile&.avatar&.attached?#画像がアップロードされているかのメソッド
-    profile.avatar
-  else
-    'default-avatar.png'
-  end
-end
 
 private
 #==userがUserクラスのインスタンスであるか？is_a?(User)==
