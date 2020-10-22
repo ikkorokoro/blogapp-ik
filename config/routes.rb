@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   resource :timeline, only: [:show] #=> %i(show create)
 
   resources :articles do
-    resources :comments, only: [:new, :create]
+    resources :comments, only: [:index, :new, :create]
     
-    resource :like, only: [:create, :destroy]
+    resource :like, only: [:show, :create, :destroy]
   end#, only: [:show, :new, :create, :edit, :update, :destroy]
 
   resources :accounts, only: [:show] do
