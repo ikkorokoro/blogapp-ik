@@ -1,0 +1,5 @@
+#saidekiqの設定を記述しておく
+:concurrency: 1
+:queues:
+  - default
+  - mailers
