@@ -43,6 +43,8 @@ group :development, :test do
   gem 'pry-byebug'#=========================追加
   gem 'rubocop-rails'#======================追加
   gem 'dotenv-rails'#=======================追加
+  gem 'letter_opener'#======================追加
+  gem 'letter_opener_web', '~> 1.0'#========追加
 end
 
 group :development do
