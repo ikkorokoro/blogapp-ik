@@ -10,7 +10,7 @@
 #
 # Indexes
 #
-#  index_relationships_on_follower_id   (follower_id)
+#  index_relationships_on_follower_id    (follower_id)
 #  index_relationships_on_following_id  (following_id)
 #
 # Foreign Keys
