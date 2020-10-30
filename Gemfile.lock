@@ -335,6 +335,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
+  connection_pool
   devise
   dotenv-rails
   erb2haml
@@ -349,6 +350,7 @@ DEPENDENCIES
   pry-byebug
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.3)
+  redis
   rubocop-rails
   sass-rails (>= 6)
   selenium-webdriver
