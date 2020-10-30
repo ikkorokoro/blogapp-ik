@@ -54,7 +54,7 @@ has_many :followers, through: :follower_relationships, source: :follower
 #フォローしているユーザーの情報を取得する
 
 
-#===フォローするメソッド===
+# #===フォローするメソッド===
 def follow!(user)
   #==userがUserクラスのインスタンスであるか？is_a?(User)==
     #==userのインスタンスか数字のみが渡される可能性があるため==

@@ -28,9 +28,13 @@ gem 'faker' #============================追加
 gem 'hamlit' #===========================追加
 gem 'aws-sdk-s3', require: false #=======追加
 gem 'active_decorator'#==================追加
-gem 'sendgrid-ruby'#====================追加
+gem 'sendgrid-ruby'#=====================追加
+gem 'sidekiq'#===========================追加
+gem 'redis'#=============================
+gem 'connection_pool'#==================
+
 # Use Active Storage variant
-gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'#=======コメントイン
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
