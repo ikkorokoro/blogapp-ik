@@ -335,7 +335,6 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
-  connection_pool
   devise
   dotenv-rails
   erb2haml
