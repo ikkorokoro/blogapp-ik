@@ -30,8 +30,8 @@ gem 'aws-sdk-s3', require: false #=======追加
 gem 'active_decorator'#==================追加
 gem 'sendgrid-ruby'#=====================追加
 gem 'sidekiq'#===========================追加
-gem 'redis'#=============================
-gem 'connection_pool'#==================
+
+
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'#=======コメントイン

@@ -31,11 +31,13 @@ const appendNewComment = (comment) => {
 }
 
 
-//=====================================================
-document.addEventListener('turbolinks:load', () => {
+//======================================================================
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
   const dataset = $('#article-show').data()
   const articleId = dataset.articleId//articleIdを取得
-
   /* getリクエストを送り, commetsを取得し,
   それを一つずつ.comments-containerに追加する */
   axios.get(`/articles/${articleId}/comments`)
@@ -80,5 +82,3 @@ document.addEventListener('turbolinks:load', () => {
     listenInactiveHeartEvent(articleId)
     listenActiveHeartEvent(articleId)
   })
-
-  

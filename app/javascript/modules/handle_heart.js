@@ -45,7 +45,7 @@ $('.active-heart').on('click', () => {
 export {
   listenInactiveHeartEvent,
   listenActiveHeartEvent
-  //プロパティと値が一緒の時は省略した書くこともできる
+  //プロパティと値が一緒の時は省略して書くこともできる
   //javascriptで書く場合バージョンによって省略記法がかけない場合があるので注意する
 }
 /* listenInactiveHeartEvent: listenInactiveHeartEvent, 
