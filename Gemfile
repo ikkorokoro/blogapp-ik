@@ -49,6 +49,8 @@ group :development, :test do
   gem 'dotenv-rails'#=======================追加
   gem 'letter_opener'#======================追加
   gem 'letter_opener_web', '~> 1.0'#========追加
+  gem 'rspec-rails'#========================追加
+  gem 'factory_bot_rails'#===================追加
 end
 
 group :development do
