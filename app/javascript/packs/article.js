@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const articleId = dataset.articleId//articleIdを取得
   /* getリクエストを送り, commetsを取得し,
   それを一つずつ.comments-containerに追加する */
-  axios.get(`/articles/${articleId}/comments`)
+  axios.get(`/api/articles/${articleId}/comments`)
     .then((response) => {
       const comments = response.data
       comments.forEach((comment) => { //foreachはeachと同じ
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!content) {
       window.alert('コメントを入力してください')
     } else {
-      axios.post(`/articles/${articleId}/comments`, {
+      axios.post(`/api/articles/${articleId}/comments`, {
         comment: { content: content }//parameterの指定をする.ハッシュのハッシュの構造にする
       })
         .then((res) => { //resが帰ってきたらcomment追加する
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* 自分がいいねしているなら.active-heartを表示
   いいねしていないなら.inactive-heartを表示する */
-  axios.get(`/articles/${articleId}/like`)
+  axios.get(`/api/articles/${articleId}/like`)
     .then((response) => {
       const hasLiked = response.data.hasLiked
       //可読性を上げるため関数としてコードを分けて記述する
