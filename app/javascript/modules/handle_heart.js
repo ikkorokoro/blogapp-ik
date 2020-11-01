@@ -8,7 +8,7 @@ const listenInactiveHeartEvent = (articleId) => {
       .active-heartの.hiddenを削除し、inactive-heartに.hiddenを追加する
       もし違う時alert('Error')とconsole.logにエラーを表示 */
       $('.inactive-heart').on('click', () => {
-        axios.post(`/articles/${articleId}/like`)
+        axios.post(`/api/articles/${articleId}/like`)
           .then((response) => {
             if (response.data.status === 'ok') {
               $('.active-heart').removeClass('hidden')
@@ -28,7 +28,7 @@ const listenActiveHeartEvent = (articleId) => {
 .active-heartに.hiddenを追加する.inactive-heartの.hiddenを削除 
 もし違う時alert('Error')とconsole.logにエラーを表示*/
 $('.active-heart').on('click', () => {
-  axios.delete(`/articles/${articleId}/like`)
+  axios.delete(`/api/articles/${articleId}/like`)
     .then((response) => {
       if (response.data.status === 'ok') {
         $('.active-heart').addClass('hidden')
@@ -45,9 +45,10 @@ $('.active-heart').on('click', () => {
 export {
   listenInactiveHeartEvent,
   listenActiveHeartEvent
+  /* listenInactiveHeartEvent: listenInactiveHeartEvent, 
+    listenActiveHeartEvent: listenActiveHeartEvent 
+    このように書くこともできるが*/
+
   //プロパティと値が一緒の時は省略して書くこともできる
   //javascriptで書く場合バージョンによって省略記法がかけない場合があるので注意する
 }
-/* listenInactiveHeartEvent: listenInactiveHeartEvent, 
-    listenActiveHeartEvent: listenActiveHeartEvent 
-    このように書くこともできるが*/
