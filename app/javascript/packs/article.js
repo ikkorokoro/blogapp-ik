@@ -26,7 +26,7 @@ const handleControllerForm = () => {
 
 const appendNewComment = (comment) => {
   $('.comments-container').append(//appendはタグの中にhtmlのタグを追加していく
-    `<div class="article_comment"><p>${comment.content}</p></div>`
+    `<div class="article_comment"><p>${escape(comment.content)}</p></div>`
   )
 }
 
